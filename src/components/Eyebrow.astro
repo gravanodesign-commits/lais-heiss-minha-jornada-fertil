@@ -1,0 +1,6 @@
+---
+import Icon from './Icon.astro';
+interface Props { tone?: 'light' | 'dark'; class?: string }
+const { tone = 'light', class: cls } = Astro.props;
+---
+<span class:list={['eyebrow', `eyebrow-${tone}`, cls]}><Icon name="sparkle" size={16} /><span><slot /></span></span>

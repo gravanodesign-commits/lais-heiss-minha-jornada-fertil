@@ -1,0 +1,9 @@
+---
+import { icons } from '../data/icons';
+interface Props { name: string; size?: number; class?: string; label?: string }
+const { name, size = 24, class: cls, label } = Astro.props;
+const body = icons[name] ?? '';
+---
+<svg class:list={['icon', cls]} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"
+  aria-hidden={label ? undefined : 'true'} role={label ? 'img' : undefined} aria-label={label} set:html={body} />

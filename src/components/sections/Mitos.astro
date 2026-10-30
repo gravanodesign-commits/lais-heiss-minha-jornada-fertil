@@ -1,0 +1,92 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+const rows = [
+  ['É só acompanhar o período fértil', 'Envolve corpo, rotina, exames e hábitos', 'calendar-cycle'],
+  ['É só ajustar a alimentação', 'Alimentação é uma peça, não a solução isolada', 'apple'],
+  ['É responsabilidade da mulher', 'Pode envolver fatores masculinos também', 'couple-heart'],
+  ['Basta fazer “mais uma coisa”', 'O que falta geralmente é conexão entre as peças', 'sparkle'],
+];
+---
+<section class="framed mitos">
+  <div class="frame guides">
+    <Star x="81.8%" y={120} size={18} fase={2} />
+    <Star x="16.3%" y={200} size={12} ritmo="rapido" />
+    <Star x="10.5%" y={90} size={18} ritmo="lento" fase={2} />
+
+    <div class="wrap inner">
+      <header class="head center" data-reveal>
+        <Eyebrow>Mitos x prática</Eyebrow>
+        <h2 class="t-h2 w-medium c-heading">O que costuma se pensar sobre fertilidade — e <span class="c-soft">o que realmente importa</span></h2>
+      </header>
+
+      <div class="table">
+        <div class="thead" aria-hidden="true">
+          <p><Icon name="message:f" size={20} class="c-muted" /><span class="note c-muted">se pensa que…</span></p>
+          <span></span>
+          <p><Icon name="check-circle:f" size={20} class="c-brand" /><span class="note c-brand">na prática…</span></p>
+        </div>
+        <ul class="rows">
+          {rows.map(([myth, fact, icon]) => (
+            <li class="row" data-reveal>
+              <div class="myth">
+                <span class="label-m note c-muted"><Icon name="close" size={20} />se pensa que…</span>
+                <Icon name="close" size={20} class="ic-d" />
+                <p class="t-body-sm c-muted"><span class="sr-only">Mito: </span><span class="strike-text">{myth}</span></p>
+              </div>
+              <div class="arrow" aria-hidden="true"><Icon name="arrow-right" size={24} /></div>
+              <div class="fact">
+                <span class="fact-top"><Badge icon={icon} size="S" color="lavanda" /><span class="note c-brand label-m">na prática…</span></span>
+                <p class="t-body-sm w-medium c-heading"><span class="sr-only">Na prática: </span>{fact}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="closing" data-reveal>
+        <Badge icon="heart-brand" size="L" color="amarelo" />
+        <p class="t-body-md c-primary">O Minha Jornada Fértil existe para te ajudar a <strong class="w-medium c-brand">enxergar essas peças juntas</strong> — e identificar o que está ao alcance de vocês dois agora, seja qual for o momento em que vocês estão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .frame { background: linear-gradient(180deg, var(--cream-50), var(--lavender-100)); }
+  .inner { display: flex; flex-direction: column; align-items: center; gap: 56px; }
+  .head { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 760px; }
+  .table { width: 100%; max-width: 1104px; display: flex; flex-direction: column; gap: 24px; }
+  .thead { display: grid; grid-template-columns: 1fr 64px 1fr; }
+  .thead p { display: flex; align-items: center; gap: 8px; padding-left: 24px; }
+  .thead .note { font-size: 26px; }
+  .rows { display: flex; flex-direction: column; gap: 12px; }
+  .row { display: grid; grid-template-columns: 1fr 64px 1fr; align-items: center; }
+  .myth, .fact { display: flex; align-items: center; min-height: 56px; border-radius: var(--radius-3xl); }
+  .myth { gap: 16px; padding: 16px 24px; background: var(--bg-surface); border: var(--hairline) dashed var(--lavender-200); }
+  .myth :global(.ic-d) { color: var(--navy-700); flex: none; }
+  .fact { gap: 12px; padding: 8px 24px 8px 8px; background: var(--gray-0); border: var(--hairline) solid var(--lavender-200); }
+  .fact-top { display: contents; }
+  .arrow { display: grid; place-items: center; color: var(--lavender-500); }
+  .label-m { display: none; }
+  .strike-text { background: linear-gradient(currentColor, currentColor) 0 55% / var(--strike, 0%) 1px no-repeat; transition: background-size .8s ease .2s; }
+  .row.is-in .strike-text { --strike: 100%; }
+  .closing { width: 100%; max-width: 1104px; display: flex; align-items: center; gap: 24px; padding: 24px; background: var(--gray-0); border: var(--hairline) solid var(--lavender-200); border-radius: var(--radius-2xl); }
+
+  @media (max-width: 1023px) {
+    .thead { display: none; }
+    .row { grid-template-columns: 1fr; gap: 8px; }
+    .arrow { display: none; }
+    .myth, .fact { flex-direction: column; align-items: flex-start; padding: 16px 24px; gap: 16px; }
+    .myth :global(.ic-d) { display: none; }
+    .label-m { display: inline-flex; align-items: center; gap: 10px; font-size: 22px; }
+    .label-m :global(.icon) { color: var(--navy-700); }
+    .fact-top { display: flex; align-items: center; gap: 10px; }
+  }
+  @media (max-width: 767px) {
+    .inner { gap: 40px; }
+    .closing { flex-direction: column; text-align: center; padding: 32px 24px; }
+  }
+</style>

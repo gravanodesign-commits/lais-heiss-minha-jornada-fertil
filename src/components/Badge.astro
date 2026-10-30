@@ -1,0 +1,36 @@
+---
+// "Icon Badge" do Figma: anéis, grade, meio-tom, tile com ícone e brilhos. Tamanhos S/M/L = 40/56/72.
+import { icons } from '../data/icons';
+interface Props { icon: string; size?: 'S' | 'M' | 'L'; color?: 'lavanda' | 'amarelo'; class?: string }
+const { icon, size = 'L', color = 'lavanda', class: cls } = Astro.props;
+const G = {
+  S: { s: 40, ring: 3, grid: 4, line: 7, tile: 20, tileAt: 10, r: 6, ic: 12, sp1: [26, 5, 6], sp2: null },
+  M: { s: 56, ring: 4, grid: 5, line: 10, tile: 26, tileAt: 15, r: 7.5, ic: 15, sp1: [37, 7, 9], sp2: [7, 36, 7] },
+  L: { s: 72, ring: 5, grid: 6, line: 13, tile: 32, tileAt: 20, r: 9, ic: 18, sp1: [48, 9, 11], sp2: [9, 46, 8] },
+}[size];
+const C = color === 'amarelo'
+  ? { ring: '#FCEDB9', inner: '#FFFBEE', half: '#F5CF62', tile: '#F5CF62', icon: '#2E3047', spFill: '#F9E092', spStroke: '#FFFFFF' }
+  : { ring: '#CDD1E8', inner: '#F3F4FA', half: '#8B93C3', tile: '#8B93C3', icon: '#FAF7EC', spFill: '#FFFFFF', spStroke: '#B3B8DB' };
+const { s } = G; const c = s / 2; const g = G.grid; const gs = s - g * 2;
+const spark = (x: number, y: number, w: number) => {
+  const k = w / 11; // forma do brilho baseada no L (11px)
+  return `<path transform="translate(${x} ${y}) scale(${k})" d="M5.5 0C4.62 2.97 3.3 4.29 0 5.5C3.3 6.71 4.62 8.03 5.5 11C6.38 8.03 7.7 6.71 11 5.5C7.7 4.29 6.38 2.97 5.5 0Z" fill="${C.spFill}" stroke="${C.spStroke}" stroke-width="${0.9 / k}" stroke-linejoin="round"/>`;
+};
+const uid = `b${Math.random().toString(36).slice(2, 8)}`;
+const ip = (icons[icon] ?? '');
+const iconScale = G.ic / 24;
+const svg = `
+<defs><clipPath id="${uid}"><circle cx="${c}" cy="${c}" r="${gs / 2}"/></clipPath>
+<filter id="${uid}f" x="-50%" y="-50%" width="200%" height="220%"><feDropShadow dx="0" dy="1" stdDeviation="0.5" flood-color="#38424F" flood-opacity=".05"/><feDropShadow dx="0" dy="3" stdDeviation="1.5" flood-color="#38424F" flood-opacity=".04"/><feDropShadow dx="0" dy="6" stdDeviation="3" flood-color="#38424F" flood-opacity=".04"/><feDropShadow dx="0" dy="12" stdDeviation="6" flood-color="#38424F" flood-opacity=".06"/></filter></defs>
+<circle cx="${c}" cy="${c}" r="${c - 0.5}" fill="#fff" stroke="${C.ring}"/>
+<circle cx="${c}" cy="${c}" r="${c - G.ring - 0.5}" fill="${C.inner}" stroke="${C.ring}"/>
+<g clip-path="url(#${uid})">
+  <rect opacity=".08" x="${g}" y="${g}" width="${gs / 2}" height="${gs}" fill="${C.half}"/>
+  <rect x="${g + G.line}" y="${g}" width="1" height="${gs}" fill="${C.ring}"/><rect x="${g}" y="${g + G.line}" width="${gs}" height="1" fill="${C.ring}"/>
+  <rect x="${s - g - G.line - 1}" y="${g}" width="1" height="${gs}" fill="${C.ring}"/><rect x="${g}" y="${s - g - G.line - 1}" width="${gs}" height="1" fill="${C.ring}"/>
+</g>
+<g filter="url(#${uid}f)"><rect x="${G.tileAt}" y="${G.tileAt}" width="${G.tile}" height="${G.tile}" rx="${G.r}" fill="${C.tile}" stroke="#fff" stroke-width="1.25"/></g>
+<g transform="translate(${c - G.ic / 2} ${c - G.ic / 2}) scale(${iconScale})" fill="none" stroke="${C.icon}" stroke-width="${1 / iconScale}" stroke-linecap="round" stroke-linejoin="round" style="--ko:${C.tile}">${ip}</g>
+${spark(G.sp1[0], G.sp1[1], G.sp1[2])}${G.sp2 ? spark(G.sp2[0], G.sp2[1], G.sp2[2]) : ''}`;
+---
+<svg class:list={['badge', `badge-${size.toLowerCase()}`, cls]} width={s} height={s} viewBox={`0 0 ${s} ${s}`} fill="none" aria-hidden="true" set:html={svg} />

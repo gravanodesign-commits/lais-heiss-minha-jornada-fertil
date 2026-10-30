@@ -1,0 +1,7 @@
+---
+interface Props { href: string; variant?: 'primary' | 'accent' | 'outline'; size?: 'L' | 'M'; class?: string; event?: string }
+const { href, variant = 'primary', size = 'L', class: cls, event } = Astro.props;
+const external = /^https?:/.test(href);
+---
+<a href={href} class:list={['btn', `btn-${variant}`, `btn-${size.toLowerCase()}`, cls]} data-event={event}
+  target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}><span><slot /></span></a>

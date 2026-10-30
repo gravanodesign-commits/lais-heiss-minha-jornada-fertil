@@ -1,0 +1,5 @@
+---
+interface Props { class?: string; href?: string }
+const { class: cls, href = '#topo' } = Astro.props;
+---
+<a href={href} class:list={['logo', cls]} aria-label="Minha Jornada Fértil — início"><img src="/logo.svg" alt="" width="139" height="64" /></a>

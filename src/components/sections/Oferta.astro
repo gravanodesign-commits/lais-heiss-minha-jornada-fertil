@@ -1,0 +1,83 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import Button from '../Button.astro';
+import Arrow from '../Arrow.astro';
+import { site } from '../../data/site';
+const inclui = ['7 módulos', '30 aulas gravadas', '12 meses de acesso', 'Suporte pela plataforma'];
+---
+<section class="section oferta" id="oferta">
+  <div class="wrap grid">
+    <div class="text" data-reveal>
+      <div class="head">
+        <Eyebrow>Oferta</Eyebrow>
+        <h2 class="t-h2 w-medium c-heading">Comece agora a sua <span class="c-soft">Jornada Fértil</span></h2>
+        <div class="paras">
+          <p class="t-body-md c-secondary">Você não precisa esperar encontrar mais uma informação na internet. Nem adicionar mais um “será?” à lista de dúvidas que já passam pela sua cabeça.</p>
+          <p class="t-body-md c-secondary">O Minha Jornada Fértil foi criado para ajudar você a organizar essa preparação, compreender melhor o que está ao seu alcance e incluir o seu parceiro nesse processo.</p>
+        </div>
+      </div>
+      <div class="guarantee">
+        <Badge icon="shield-check" size="M" color="lavanda" />
+        <div>
+          <h3 class="t-body-md w-medium c-heading">Você tem 7 dias para conhecer</h3>
+          <p class="t-body-sm c-primary">Depois da compra, você poderá acessar o conteúdo e conhecer o Minha Jornada Fértil. Se, dentro dos primeiros 7 dias, entender que o curso não é para você, poderá solicitar o reembolso pelos canais disponibilizados pela plataforma.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card offer" data-reveal>
+      <Eyebrow>Ao entrar hoje, você recebe</Eyebrow>
+      <ul class="inc">
+        {inclui.map(i => <li class="t-body-lg w-medium c-heading"><Icon name="check-circle" size={24} />{i}</li>)}
+      </ul>
+      <hr />
+      <div class="price">
+        <p class="t-overline c-muted">Investimento</p>
+        <div class="value-row">
+          <p class="t-display w-bold c-heading value">R$ 397</p>
+          <Arrow width={45} />
+          <p class="note per-day">menos de<br />R$1,10 por dia</p>
+        </div>
+        <p class="t-caption c-muted">com as opções de pagamento apresentadas no momento da compra</p>
+      </div>
+      <Button href={site.checkout} class="buy" event="cta_oferta">Quero começar minha Jornada Fértil</Button>
+      <p class="safe t-caption c-muted"><Icon name="lock" size={16} />Compra segura pela Hotmart</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: 616px 520px; justify-content: space-between; gap: 80px; align-items: center; }
+  .text { display: flex; flex-direction: column; gap: 32px; }
+  .head { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; max-width: 560px; }
+  .paras { display: flex; flex-direction: column; gap: 16px; max-width: 540px; }
+  .guarantee { display: flex; gap: 16px; padding: 20px 32px 32px 20px; background: var(--lavender-50); border: var(--hairline) solid var(--lavender-100); border-radius: var(--radius-2xl); max-width: 565px; }
+  .guarantee :global(.badge) { flex: none; }
+  .guarantee > div { display: flex; flex-direction: column; gap: 4px; }
+  .offer { padding: 40px; border-radius: var(--radius-3xl); display: flex; flex-direction: column; gap: 24px; align-items: flex-start; box-shadow: 0 40px 80px -48px rgba(45, 49, 132, .35); }
+  .inc { display: flex; flex-direction: column; gap: 16px; }
+  .inc li { display: flex; align-items: center; gap: 12px; }
+  .inc :global(.icon) { color: var(--navy-700); flex: none; }
+  hr { width: 100%; border: 0; border-top: 1px solid var(--lavender-100); margin: 0; }
+  .price { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+  .value-row { display: flex; align-items: center; gap: 12px; }
+  .value { white-space: nowrap; }
+  .value-row :global(.note-arrow) { transform: translateY(-4px); }
+  .per-day { font-size: 26px; color: var(--lavender-600); transform: rotate(-4deg); }
+  .offer :global(.buy) { width: 100%; }
+  .safe { width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; }
+  .safe :global(.icon) { color: var(--navy-700); }
+  @media (max-width: 1279px) { .grid { grid-template-columns: 1fr 480px; gap: 56px; } }
+  @media (max-width: 1023px) { .grid { grid-template-columns: 1fr; gap: 48px; } .offer { max-width: 560px; } }
+  @media (max-width: 767px) {
+    .guarantee { flex-direction: column; padding: 24px; }
+    .offer { padding: 24px; }
+    .value-row { gap: 4px; }
+    .value-row :global(.note-arrow) { width: 28px; }
+    .per-day { font-size: 19px; }
+    .offer :global(.buy) { white-space: normal; text-align: center; }
+    .safe { justify-content: flex-start; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+const bonus = [
+  ['apple', 'Cardápio fértil', 'Bônus 1', 'Sugestões do café da manhã ao jantar, com alimentos acessíveis e refeições adaptáveis à sua rotina, sem prescrição de quantidades.'],
+  ['check-circle', 'Carrinho fértil', 'Bônus 2', 'Alimentos-chave para uma alimentação voltada à fertilidade do casal, organizados por grupo, com lista de compras semanal.'],
+  ['map-pin', 'Menu fora de casa', 'Bônus 3', 'Orientações para escolher bem em restaurantes, viagens, festas e delivery, sem abrir mão da vida social.'],
+];
+---
+<section class="section bonus">
+  <div class="wrap grid">
+    <div class="text" data-reveal>
+      <div class="head">
+        <Eyebrow>Bônus</Eyebrow>
+        <h2 class="t-h2 w-medium c-heading">Da teoria para a <span class="c-soft">vida real</span></h2>
+        <p class="t-body-md c-secondary">Informação só faz diferença quando conseguimos levá-la para a rotina. Por isso, além das aulas, você também recebe como bônus:</p>
+      </div>
+      <p class="highlight t-body-md w-medium c-heading"><Icon name="sparkle" size={24} />Mais autonomia para montar seu prato e entender o porquê de cada escolha.</p>
+    </div>
+    <ul class="list">
+      {bonus.map(([icon, title, tag, desc]) => (
+        <li class="card item" data-reveal>
+          <Badge icon={icon} size="L" color="amarelo" />
+          <div class="txt">
+            <h3 class="title"><span class="t-body-md w-medium c-heading">{title}</span><span class="tag">{tag}</span></h3>
+            <p class="t-body-sm c-secondary">{desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: 516px 620px; justify-content: space-between; gap: 80px; align-items: start; }
+  .text { display: flex; flex-direction: column; gap: 32px; }
+  .head { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+  .head p { max-width: 500px; }
+  .highlight { display: flex; align-items: center; gap: 16px; padding: 16px 24px 16px 20px; background: var(--lavender-50); border-radius: var(--radius-2xl); max-width: 504px; }
+  .highlight :global(.icon) { color: var(--navy-700); flex: none; }
+  .list { display: flex; flex-direction: column; gap: 16px; }
+  .item { display: flex; gap: 20px; padding: 32px; border-color: var(--lavender-100); transition: transform .3s ease, box-shadow .3s ease; }
+  .item:hover { transform: translateY(-3px); box-shadow: 0 24px 40px -28px rgba(45, 49, 132, .3); }
+  .item :global(.badge) { flex: none; }
+  .txt { display: flex; flex-direction: column; gap: 8px; }
+  .title { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-weight: inherit; }
+  @media (max-width: 1279px) { .grid { grid-template-columns: 1fr 1.2fr; gap: 56px; } }
+  @media (max-width: 1023px) { .grid { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 767px) {
+    .item { flex-direction: column; gap: 16px; padding: 24px; }
+  }
+</style>

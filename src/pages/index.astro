@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/sections/Hero.astro';
+import Solucao from '../components/sections/Solucao.astro';
+import Mitos from '../components/sections/Mitos.astro';
+import Curso from '../components/sections/Curso.astro';
+import Momentos from '../components/sections/Momentos.astro';
+import Bonus from '../components/sections/Bonus.astro';
+import Autoridade from '../components/sections/Autoridade.astro';
+import Oferta from '../components/sections/Oferta.astro';
+import Mensagem from '../components/sections/Mensagem.astro';
+import Faq from '../components/sections/Faq.astro';
+import Final from '../components/sections/Final.astro';
+---
+<Base>
+  <Header />
+  <main>
+    <Hero />
+    <Solucao />
+    <Mitos />
+    <Curso />
+    <Momentos />
+    <Bonus />
+    <Autoridade />
+    <Oferta />
+    <Mensagem />
+    <Faq />
+    <Final />
+  </main>
+  <script>
+    import '../scripts/motion.ts';
+  </script>
+</Base>

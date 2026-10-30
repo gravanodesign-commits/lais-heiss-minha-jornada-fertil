@@ -1,0 +1,91 @@
+/* Tokens exportados do Figma "Site: Dra. Lais Heiss" (coleções Primitives, Color, Dimensions, Typography). */
+
+@font-face { font-family: "Dunbar Tall"; src: url("/fonts/DunbarTall-Light.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Dunbar Tall"; src: url("/fonts/DunbarTall-Book.woff2") format("woff2"); font-weight: 350; font-display: swap; }
+@font-face { font-family: "Dunbar Tall"; src: url("/fonts/DunbarTall-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Dunbar Tall"; src: url("/fonts/DunbarTall-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Dunbar Tall"; src: url("/fonts/DunbarTall-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+/* Caveat (SIL OFL) — anotações manuscritas */
+@font-face { font-family: "Caveat"; src: url("/fonts/Caveat-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Caveat"; src: url("/fonts/Caveat-latin-ext-400.woff2") format("woff2"); font-weight: 400; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  /* Primitives */
+  --lavender-50: #f3f4fa; --lavender-100: #e6e8f4; --lavender-200: #cdd1e8; --lavender-300: #b3b8db; --lavender-400: #9ea5cf;
+  --lavender-500: #8b93c3; --lavender-600: #6f78ae; --lavender-700: #575f92; --lavender-800: #424873; --lavender-900: #2f3453;
+  --navy-50: #f1f1f5; --navy-100: #e1e2ea; --navy-200: #c4c5d4; --navy-300: #9a9cb4; --navy-400: #6e7190;
+  --navy-500: #545776; --navy-600: #474a68; --navy-700: #3b3e5a; --navy-800: #2e3047; --navy-900: #1f2033;
+  --indigo-500: #2d3184;
+  --yellow-50: #fffbee; --yellow-100: #fef6dc; --yellow-200: #fcedb9; --yellow-300: #f9e092; --yellow-400: #f5cf62; --yellow-500: #edbb3a;
+  --cream-50: #fdfcf7; --cream-100: #faf7ec; --cream-200: #f3eedc; --cream-300: #e8e0c6;
+  --gray-0: #ffffff; --gray-50: #f8f8f9; --gray-100: #f1f1f3; --gray-200: #e4e4e8; --gray-300: #d1d1d7; --gray-400: #a6a6b0;
+  --gray-500: #7c7c88; --gray-600: #5c5c68; --gray-700: #44444e;
+
+  /* Color (semânticos) */
+  --bg-page: var(--cream-100); --bg-surface: var(--gray-0); --bg-subtle: var(--cream-50); --bg-brand-soft: var(--lavender-100);
+  --bg-accent: var(--yellow-200);
+  --text-heading: var(--indigo-500); --text-primary: var(--navy-800); --text-secondary: var(--gray-600); --text-muted: var(--gray-500);
+  --text-disabled: var(--gray-400); --text-brand: var(--lavender-600); --text-accent: var(--yellow-200); --text-on-action: var(--cream-100);
+  --text-inverse: var(--gray-0); --text-action: var(--navy-700);
+  --border-default: var(--gray-200); --border-action: var(--navy-600);
+  --action-primary: var(--navy-600); --action-primary-hover: var(--navy-700); --action-primary-pressed: var(--navy-800);
+  --action-accent: var(--yellow-200); --action-accent-hover: var(--yellow-300); --action-accent-pressed: var(--yellow-400);
+  --action-outline-hover: var(--navy-50); --action-outline-pressed: var(--navy-100);
+  --icon-current: var(--navy-700);
+
+  /* Dimensions */
+  --space-2: 2px; --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px; --space-20: 20px; --space-24: 24px;
+  --space-32: 32px; --space-40: 40px; --space-48: 48px; --space-56: 56px; --space-64: 64px; --space-80: 80px; --space-96: 96px; --space-120: 120px;
+  --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px; --radius-2xl: 24px; --radius-3xl: 32px; --radius-4xl: 40px; --radius-5xl: 48px; --radius-full: 9999px;
+  --hairline: 0.5px;
+  --container: 1216px;
+  --section-y: 120px;
+  --margin: 112px;
+  --frame-inset: 16px; /* moldura dos blocos com fundo próprio */
+
+  /* Typography — Desktop */
+  --font: "Dunbar Tall", "Outfit", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+  --fs-display: 72px; --lh-display: 80px;
+  --fs-h1: 56px; --lh-h1: 64px;
+  --fs-h2: 44px; --lh-h2: 52px;
+  --fs-h3: 34px; --lh-h3: 42px;
+  --fs-h4: 26px; --lh-h4: 34px;
+  --fs-h5: 22px; --lh-h5: 30px;
+  --fs-body-lg: 20px; --lh-body-lg: 30px;
+  --fs-body-md: 18px; --lh-body-md: 28px;
+  --fs-body-sm: 16px; --lh-body-sm: 24px;
+  --fs-caption: 14px; --lh-caption: 20px;
+  --fs-overline: 13px; --lh-overline: 16px;
+  --fs-label-lg: 16px; --lh-label-lg: 20px;
+  --fs-label-md: 14px; --lh-label-md: 18px;
+
+  --shadow-button: 0 1px 2px rgba(46, 48, 71, .10), 0 3px 6px -1px rgba(46, 48, 71, .08), 0 8px 16px -4px rgba(46, 48, 71, .10);
+  --shadow-chip: 0 8px 24px -4px rgba(46, 48, 71, .10), 0 2px 6px rgba(46, 48, 71, .04);
+}
+
+/* Typography — Mobile (modo "Mobile" da coleção Typography) */
+@media (max-width: 767px) {
+  :root {
+    --fs-display: 48px; --lh-display: 54px;
+    --fs-h1: 40px; --lh-h1: 46px;
+    --fs-h2: 32px; --lh-h2: 38px;
+    --fs-h3: 26px; --lh-h3: 32px;
+    --fs-h4: 22px; --lh-h4: 28px;
+    --fs-h5: 20px; --lh-h5: 26px;
+    --fs-body-lg: 18px; --lh-body-lg: 28px;
+    --fs-body-md: 16px; --lh-body-md: 24px;
+    --fs-body-sm: 14px; --lh-body-sm: 22px;
+    --fs-caption: 12px; --lh-caption: 18px;
+    --fs-overline: 12px; --lh-overline: 16px;
+    --section-y: 64px;
+    --margin: 20px;
+    --frame-inset: 8px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  :root { --margin: 48px; --section-y: 96px; }
+}

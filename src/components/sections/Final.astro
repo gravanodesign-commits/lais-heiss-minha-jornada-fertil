@@ -1,0 +1,107 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+import Heart from '../Heart.astro';
+import Button from '../Button.astro';
+import { site } from '../../data/site';
+const passos = [['book-open', 'Organize as informações'], ['calendar-cycle', 'Entenda melhor o seu momento'], ['couple-heart', 'Inclua o seu parceiro']];
+const garantias = [['lock', 'Compra segura pela Hotmart'], ['shield-check', '7 dias de garantia'], ['calendar', '12 meses de acesso']];
+---
+<section class="framed final">
+  <div class="frame frame-dark guides">
+    <div class="deco" aria-hidden="true">
+      <i class="ring" style="width:700px;height:700px;border-color:rgba(255,255,255,.12)"></i>
+      <i class="ring" style="width:960px;height:960px;border-color:rgba(255,255,255,.09)"></i>
+      <i class="ring" style="width:1220px;height:1220px;border-color:rgba(255,255,255,.06)"></i>
+      <i class="glow"></i>
+    </div>
+    <Heart class="heart" color="rgba(255,255,255,.2)" />
+    <Star x="8.5%" y={300} size={14} />
+    <Star x="83.8%" y={140} size={18} ritmo="lento" />
+    <Star x="69.6%" y={470} size={10} ritmo="rapido" />
+    <Star x="29.8%" y={90} size={10} fase={2} />
+    <Star x="17%" y={150} size={18} ritmo="rapido" />
+    <Star x="92.3%" y={563} size={14} ritmo="lento" fase={2} />
+    <Star x="21.3%" y={470} size={10} />
+
+    <div class="wrap inner">
+      <div data-reveal><Eyebrow tone="dark">Comece hoje</Eyebrow></div>
+      <h2 class="t-h3 center" data-reveal>
+        <span class="w-light" style="color:var(--text-inverse)">Talvez você não precise tentar mais coisas.</span><br />
+        <span class="w-medium c-accent">Talvez precise entender melhor o que realmente faz sentido para a sua jornada.</span>
+      </h2>
+      <ul class="passos" data-reveal>
+        {passos.map(([icon, label]) => <li class="chip chip-dark"><Icon name={icon} size={20} />{label}</li>)}
+      </ul>
+      <div class="cta" data-reveal>
+        <Button href={site.checkout} variant="accent" event="cta_final">Quero começar minha Jornada Fértil</Button>
+        <ul class="garantias">
+          {garantias.map(([icon, label]) => <li class="t-body-sm"><Icon name={icon} size={16} />{label}</li>)}
+        </ul>
+      </div>
+      <div class="photos" aria-hidden="true">
+        <figure class="ph ph-1" data-rise><span class="arch"></span><img src="/img/lais-final-1.webp" alt="" width="500" height="1179" loading="lazy" /></figure>
+        <figure class="ph ph-2" data-rise><span class="arch"></span><img src="/img/lais-final-2.webp" alt="" width="500" height="981" loading="lazy" /></figure>
+        <figure class="ph ph-3" data-rise><span class="arch"></span><img src="/img/lais-final-3.webp" alt="" width="600" height="981" loading="lazy" /></figure>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <a href="#topo" class="flogo" aria-label="Voltar ao início"><img src="/logo.svg" alt="Minha Jornada Fértil" width="104" height="48" loading="lazy" /></a>
+    <p class="t-caption c-muted">Curso educativo · não substitui avaliação, diagnóstico ou tratamento individualizado.</p>
+    <p class="t-caption c-muted hot"><Icon name="lock" size={16} />Compra segura pela Hotmart</p>
+  </footer>
+</section>
+
+<style>
+  .frame { background: linear-gradient(180deg, var(--lavender-800), var(--lavender-600)); padding-bottom: 0; }
+  .deco { position: absolute; left: 50%; top: 300px; z-index: -1; }
+  .deco .ring { left: 0; top: 0; transform: translate(-50%, -50%); }
+  .glow { position: absolute; left: -380px; top: 80px; width: 760px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,224,145,.2), rgba(255,224,145,0)); }
+  .frame :global(.heart) { right: -40px; top: 80px; width: 478px; transform: rotate(-15deg); z-index: -1; }
+  .inner { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+  h2 { max-width: 760px; }
+  .passos { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 1000px; }
+  .cta { display: flex; flex-direction: column; align-items: center; gap: 32px; padding-top: 16px; }
+  .garantias { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .garantias li { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.85); }
+  .garantias :global(.icon) { color: var(--yellow-300); }
+  .photos { display: flex; align-items: flex-end; gap: 24px; padding-top: 40px; }
+  .ph { position: relative; margin: 0; }
+  .ph .arch { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 999px 999px 0 0; }
+  .ph img { position: relative; margin-inline: auto; max-width: none; }
+  .ph-1, .ph-3 { width: 240px; height: 280px; }
+  .ph-1 .arch, .ph-3 .arch { height: 220px; }
+  .ph-1 .arch { background: linear-gradient(180deg, var(--lavender-300), var(--lavender-500)); }
+  .ph-3 .arch { background: linear-gradient(180deg, var(--cream-100), var(--lavender-200)); }
+  .ph-2 { width: 340px; height: 370px; }
+  .ph-2 .arch { height: 300px; background: linear-gradient(180deg, var(--yellow-200), var(--yellow-300)); }
+  .ph img { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); }
+  .ph-1 img { width: 169px; height: auto; top: 8px; bottom: auto; }
+  .ph-2 img { width: 198px; height: auto; top: 8px; bottom: auto; }
+  .ph-3 img { width: 243px; height: auto; top: 8px; bottom: auto; }
+  .ph { overflow: hidden; }
+
+  .footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 40px calc(var(--margin) - var(--frame-inset)) 32px; }
+  .flogo img { width: 104px; height: 48px; }
+  .hot { display: flex; align-items: center; gap: 8px; }
+  .hot :global(.icon) { color: var(--navy-700); }
+
+  @media (max-width: 1023px) {
+    .footer { flex-direction: column; align-items: flex-start; gap: 12px; padding-inline: 20px; }
+  }
+  @media (max-width: 767px) {
+    .frame :global(.heart) { width: 215px; right: -40px; top: 0; }
+    .deco { transform: scale(.5); transform-origin: 0 0; top: 260px; }
+    .passos { flex-direction: column; align-items: center; gap: 8px; }
+    .passos .chip { padding: 8px 16px; font-size: var(--fs-label-md); }
+    .cta { gap: 20px; }
+    .cta :global(.btn) { white-space: normal; text-align: center; }
+    .garantias { flex-direction: column; align-items: center; gap: 8px; }
+    .photos { gap: 8px; padding-top: 24px; }
+    .ph-1, .ph-3 { width: 100px; height: 118px; } .ph-1 .arch, .ph-3 .arch { height: 92px; }
+    .ph-2 { width: 142px; height: 155px; } .ph-2 .arch { height: 126px; }
+    .ph-1 img { width: 71px; top: 3px; } .ph-2 img { width: 83px; top: 3px; } .ph-3 img { width: 102px; top: 3px; }
+  }
+</style>

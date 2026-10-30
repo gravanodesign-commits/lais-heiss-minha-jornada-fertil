@@ -1,0 +1,6 @@
+---
+// Coração do logo (Logo/Coração), usado como decoração. Cor via CSS (mask).
+interface Props { class?: string; color?: string; style?: string }
+const { class: cls, color = 'var(--yellow-300)', style = '' } = Astro.props;
+---
+<span class:list={['heart-deco', cls]} style={`--heart:${color};${style}`} aria-hidden="true"></span>

@@ -1,0 +1,11 @@
+---
+// "Brilho · animado" do Figma. ritmo: lento | medio | rapido ; fase: 1 | 2
+interface Props { x?: number | string; y?: number | string; size?: number; ritmo?: 'lento' | 'medio' | 'rapido'; fase?: 1 | 2; tone?: 'yellow' | 'lavender' | 'white'; class?: string; style?: string }
+const { x, y, size = 16, ritmo = 'medio', fase = 1, tone = 'yellow', class: cls, style } = Astro.props;
+const px = (v: number | string | undefined) => (v === undefined ? undefined : typeof v === 'number' ? `${v}px` : v);
+const pos = [x !== undefined ? `left:${px(x)}` : '', y !== undefined ? `top:${px(y)}` : '', `width:${size}px`, `height:${size}px`, style ?? ''].filter(Boolean).join(';');
+const fills = { yellow: ['#F9E092', '#F5CF62'], lavender: ['#E6E8F4', '#9EA5CF'], white: ['#FFFFFF', '#FCEDB9'] }[tone];
+---
+<svg class:list={['star', `star-${ritmo}`, `star-f${fase}`, cls]} style={pos} viewBox="0 0 25 25" fill="none" aria-hidden="true">
+  <path d="M12.39 0.4C10.47 6.88 7.59 9.76 0.39 12.4C7.59 15.04 10.47 17.92 12.39 24.4C14.31 17.92 17.19 15.04 24.39 12.4C17.19 9.76 14.31 6.88 12.39 0.4Z" fill={fills[0]} stroke={fills[1]} stroke-width="0.8" stroke-linejoin="round" />
+</svg>

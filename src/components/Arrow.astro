@@ -1,0 +1,9 @@
+---
+// "Seta · anotação" exportada do Figma (aponta para a esquerda, já inclinada).
+interface Props { class?: string; width?: number; flip?: boolean }
+const { class: cls, width = 45, flip = false } = Astro.props;
+---
+<svg class:list={['note-arrow', cls]} width={width} height={width * 38 / 45} viewBox="0 0 45 38" fill="none" aria-hidden="true" style={flip ? 'transform:scaleX(-1)' : undefined}>
+  <path d="M41.48 22.79C33.58 15.15 20.7 10.79 7.28 15.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+  <path d="M9.46 8.92L6.37 15.61L13.05 18.7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

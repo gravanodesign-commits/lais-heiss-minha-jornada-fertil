@@ -1,0 +1,84 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+import Heart from '../Heart.astro';
+---
+<section class="section solucao" id="solucao">
+  <div class="wrap grid">
+    <div class="text" data-reveal-group>
+      <div class="head">
+        <Eyebrow>A solução</Eyebrow>
+        <h2 class="t-h2 c-heading">
+          <span class="w-light">Fertilidade não é sorte.</span><br />
+          <span class="w-medium">E também não precisa ser um <span class="c-soft">mistério.</span></span>
+        </h2>
+        <p class="t-body-md c-secondary">Existe uma forma mais clara de entender o seu corpo, organizar seus cuidados e se preparar — com quem já ajudou mais de 2 mil mulheres a fazer essa jornada com mais confiança.</p>
+      </div>
+      <div class="sign">
+        <Badge icon="heart-brand" size="S" color="lavanda" />
+        <div><p class="t-label-lg w-medium c-heading">Minha Jornada Fértil</p><p class="t-caption c-muted">com a nutricionista Laís Hess</p></div>
+      </div>
+      <div class="cta"><Button href="#modulos" event="cta_solucao">Quero conhecer o curso</Button></div>
+    </div>
+
+    <div class="visual" data-parallax-group>
+      <div class="arch-back" data-parallax="0.06"></div>
+      <div class="arch">
+        <img src="/img/lais-solucao.webp" alt="Laís Hess de braços cruzados, sorrindo" width="900" height="2087" loading="lazy" />
+      </div>
+      <Heart class="heart" color="var(--yellow-300)" />
+      <div class="card-mulheres" data-float>
+        <Badge icon="couple-heart" size="M" color="amarelo" />
+        <div><p class="t-h4 w-bold c-heading" data-count="2000" data-prefix="+">+2.000</p><p class="t-body-sm c-muted">mulheres e famílias atendidas</p></div>
+      </div>
+      <span class="chip chip-years t-label-md" data-float><Icon name="star" size={24} />9 anos de atuação</span>
+      <Star x={414} y={11} size={20} />
+      <Star x={444} y={51} size={12} ritmo="rapido" fase={2} />
+      <Star x={10} y={560} size={14} ritmo="lento" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: 600px 520px; justify-content: space-between; align-items: center; gap: 96px; }
+  .text { display: flex; flex-direction: column; gap: 32px; }
+  .head { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+  .head p { max-width: 560px; }
+  .sign { display: inline-flex; align-self: flex-start; align-items: center; gap: 12px; padding: 12px 24px 12px 12px; background: var(--gray-0); border: var(--hairline) solid var(--lavender-100); border-radius: var(--radius-full); }
+  .cta { padding-top: 8px; }
+
+  .visual { position: relative; width: 520px; height: 600px; }
+  .arch-back, .arch { position: absolute; width: 420px; height: 540px; border-radius: 9999px 9999px 32px 32px; }
+  .arch-back { left: 76px; top: 60px; background: var(--lavender-200); }
+  .arch { left: 36px; top: 20px; background: var(--bg-accent); border: var(--hairline) solid var(--gray-0); overflow: hidden; }
+  .arch img { position: absolute; left: 50%; top: 3%; width: 64%; max-width: none; transform: translateX(-47%); }
+  .visual :global(.heart) { left: -114px; top: 64px; width: 239px; transform: rotate(15deg); }
+  .card-mulheres { position: absolute; left: -56px; top: 420px; display: flex; align-items: center; gap: 16px; padding: 16px 24px 16px 16px; background: var(--gray-0); border: var(--hairline) solid var(--lavender-200); border-radius: var(--radius-2xl); z-index: 2; }
+  .chip-years { position: absolute; left: 330px; top: 96px; gap: 8px; white-space: nowrap; padding: 8px 16px; background: var(--navy-700); border-color: var(--navy-500); color: var(--text-on-action); z-index: 2; }
+  .chip-years :global(.icon) { color: var(--yellow-300); }
+
+  @media (max-width: 1279px) {
+    .grid { grid-template-columns: 1fr 460px; gap: 56px; }
+    .visual { transform: scale(.88); transform-origin: center; }
+  }
+  @media (max-width: 1023px) {
+    .grid { grid-template-columns: 1fr; justify-items: center; gap: 48px; }
+    .text { justify-self: stretch; }
+    .visual { transform: none; }
+  }
+  @media (max-width: 767px) {
+    .visual { width: 350px; height: 470px; }
+    .arch-back { left: 64px; top: 70px; width: 270px; height: 350px; }
+    .arch { left: 40px; top: 46px; width: 270px; height: 350px; }
+    .visual :global(.heart) { left: -6px; top: 20px; width: 150px; transform: none; }
+    .card-mulheres { left: 0; top: 360px; padding: 16px; gap: 16px; }
+    .chip-years { left: 167px; top: 96px; }
+    .visual :global(.star:nth-of-type(1)) { left: 300px !important; top: 30px !important; }
+    .visual :global(.star:nth-of-type(2)) { left: 330px !important; top: 64px !important; }
+    .visual :global(.star:nth-of-type(3)) { left: 12px !important; top: 440px !important; }
+  }
+  @media (max-width: 380px) { .visual { transform: scale(.9); transform-origin: left top; } }
+</style>

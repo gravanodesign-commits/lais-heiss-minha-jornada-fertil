@@ -1,0 +1,117 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+import Button from '../Button.astro';
+
+const numbers = [
+  ['book-open', '7 módulos', 'organizados por etapa'],
+  ['play-circle', '30 aulas gravadas', 'para assistir no seu ritmo'],
+  ['download', 'Materiais em PDF', 'guias, cardápios e planilha'],
+];
+// TODO: títulos das aulas dos módulos 2 a 7 (no Figma só o módulo 1 está detalhado)
+const modules: { title: string; meta: string; lessons: string[] }[] = [
+  { title: 'Por onde sua fertilidade realmente começa', meta: '3 aulas', lessons: ['Fertilidade é coisa do casal: entenda os dois lados da equação', 'O que ninguém te contou sobre nutrição e fertilidade', 'Preparar o corpo antes de engravidar: vale a pena?'] },
+  { title: 'Decodificando os sinais do seu corpo', meta: '3 aulas · 2 PDFs', lessons: [] },
+  { title: 'O prato que prepara você para engravidar', meta: '5 aulas · 3 PDFs', lessons: [] },
+  { title: 'Vida fértil além do prato', meta: '3 aulas · 2 PDFs', lessons: [] },
+  { title: 'Universo feminino: entendendo seu corpo', meta: '7 aulas · 1 planilha', lessons: [] },
+  { title: 'O papel dele nessa história', meta: '5 aulas · 1 PDF', lessons: [] },
+  { title: 'Nutrição a favor da sua FIV', meta: '4 aulas · 1 PDF', lessons: [] },
+];
+const count = (meta: string) => parseInt(meta, 10) || 0;
+---
+<section class="section curso" id="curso">
+  <Star x="79.2%" y={130} size={20} />
+  <Star x="19.7%" y={240} size={14} ritmo="rapido" fase={2} />
+  <div class="wrap inner">
+    <header class="head center" data-reveal>
+      <Eyebrow>O curso</Eyebrow>
+      <h2 class="t-h2 w-medium c-heading">Conheça o <span class="c-soft">Minha Jornada Fértil</span></h2>
+      <p class="t-body-md c-secondary">Um curso on-line criado para transformar informações que hoje parecem desconectadas em um caminho mais claro e possível de seguir.</p>
+    </header>
+
+    <ul class="numbers" data-reveal>
+      {numbers.map(([icon, title, sub]) => (
+        <li class="num"><Badge icon={icon} size="S" color="amarelo" /><div><p class="t-label-lg w-medium c-heading">{title}</p><p class="t-caption c-muted">{sub}</p></div></li>
+      ))}
+    </ul>
+
+    <p class="tip t-body-sm c-muted"><Icon name="info" size={16} />São 7 módulos e 30 aulas gravadas. Toque nos módulos para conferir as aulas.</p>
+
+    <div class="accordion" id="modulos" data-accordion>
+      {modules.map((m, i) => {
+        const n = String(i + 1).padStart(2, '0');
+        const lessons = m.lessons.length ? m.lessons : Array.from({ length: count(m.meta) }, () => '[Título da aula]');
+        return (
+          <details class="module" open={i === 0} data-reveal>
+            <summary>
+              <span class="mnum t-h5 w-medium">{n}</span>
+              <span class="mtext"><span class="t-overline c-brand">Módulo {i + 1}</span><span class="t-body-md w-medium c-heading">{m.title}</span></span>
+              <span class="meta t-caption c-muted">{m.meta}</span>
+              <span class="toggle" aria-hidden="true"><Icon name="plus" size={16} class="i-plus" /><Icon name="minus" size={16} class="i-minus" /></span>
+            </summary>
+            <div class="panel">
+              <ol class="lessons">
+                {lessons.map((l, j) => (
+                  <li><Icon name="play-circle" size={20} /><span class="t-label-md w-medium c-brand">{i + 1}.{j + 1}</span><span class="t-body-sm c-primary">{l}</span></li>
+                ))}
+              </ol>
+            </div>
+          </details>
+        );
+      })}
+    </div>
+
+    <div class="closing center" data-reveal>
+      <p class="t-body-md c-primary">Tudo explicado de forma <strong class="w-medium">simples, didática e aplicável à vida real.</strong></p>
+      <Button href="#para-quem" event="cta_curso">Quero conhecer o curso</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .inner { display: flex; flex-direction: column; align-items: center; }
+  .head { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 760px; }
+  .head p { max-width: 680px; }
+  .numbers { margin-top: 56px; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .num { display: flex; align-items: center; gap: 12px; padding: 12px 24px 12px 12px; background: var(--gray-0); border: var(--hairline) solid var(--lavender-100); border-radius: var(--radius-full); }
+  .tip { margin-top: 56px; display: flex; align-items: center; gap: 8px; }
+  .tip :global(.icon) { color: var(--navy-700); flex: none; }
+  .accordion { margin-top: 56px; width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 12px; }
+  .module { background: var(--bg-subtle); border: var(--hairline) solid var(--lavender-100); border-radius: var(--radius-2xl); transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+  .module[open] { background: var(--gray-0); border-color: var(--lavender-200); }
+  .module:hover:not([open]) { border-color: var(--lavender-200); }
+  summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 20px; padding: 20px; }
+  summary::-webkit-details-marker { display: none; }
+  .mnum { flex: none; min-width: 48px; height: 48px; padding: 0 12px; border-radius: var(--radius-xl); display: grid; place-items: center; background: var(--lavender-100); color: var(--text-brand); transition: background-color .3s ease, color .3s ease; }
+  .module[open] .mnum { background: var(--lavender-500); color: var(--text-on-action); }
+  .mtext { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .meta { flex: none; }
+  .module[open] .meta { visibility: hidden; }
+  .toggle { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--lavender-50); color: var(--navy-700); transition: background-color .3s ease, color .3s ease; }
+  .toggle :global(.icon) { grid-area: 1 / 1; }
+  .toggle :global(.i-minus) { display: none; }
+  .module[open] .toggle { background: var(--lavender-500); color: var(--cream-100); }
+  .module[open] :global(.i-plus) { display: none; } .module[open] :global(.i-minus) { display: block; }
+  .panel { padding: 0 20px 32px; }
+  .lessons { border-top: 1px solid var(--lavender-100); padding: 20px 0 0 64px; display: flex; flex-direction: column; gap: 4px; }
+  .lessons li { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+  .lessons :global(.icon) { color: var(--navy-700); flex: none; }
+  .closing { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+
+  @media (max-width: 767px) {
+    .numbers { margin-top: 40px; flex-direction: column; align-items: center; gap: 12px; }
+    .tip { margin-top: 40px; align-items: flex-start; text-align: left; align-self: stretch; }
+    .tip :global(.icon) { margin-top: 3px; }
+    .accordion { margin-top: 24px; }
+    summary { gap: 12px; padding: 16px; align-items: flex-start; }
+    .mnum { min-width: 40px; height: 40px; border-radius: var(--radius-lg); }
+    .meta { display: none; }
+    .panel { padding: 0 16px 20px; }
+    .lessons { padding: 16px 0 0; }
+    .lessons li { align-items: flex-start; }
+    .closing { margin-top: 40px; gap: 32px; }
+  }
+</style>

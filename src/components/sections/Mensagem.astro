@@ -1,0 +1,44 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import Button from '../Button.astro';
+import { site } from '../../data/site';
+const msg = 'Nenhuma alimentação, suplemento ou hábito garante uma gravidez — e nenhum profissional responsável prometeria isso. O Minha Jornada Fértil existe para te ajudar a entender melhor essa jornada e cuidar, com mais consciência, do que está ao seu alcance.';
+---
+<section class="framed mensagem">
+  <div class="frame guides">
+    <div class="wrap inner">
+      <div data-reveal><Badge icon="heart" size="L" color="amarelo" /></div>
+      <header class="head center">
+        <div data-reveal><Eyebrow>Uma mensagem importante</Eyebrow></div>
+        <h2 class="t-h2 w-medium c-heading" data-reveal>Sem fórmulas mágicas.<br /><span class="c-soft">Sem promessas de gravidez.</span></h2>
+        <p class="t-body-md c-secondary words" data-words>{msg.split(' ').map(w => <span class="w">{w} </span>)}</p>
+      </header>
+      <div class="contrast" data-reveal>
+        <div class="no"><Icon name="close" size={20} /><p class="t-body-md c-muted">Se você está procurando uma promessa milagrosa, este curso não é para você.</p></div>
+        <div class="yes"><Icon name="check-circle:f" size={20} /><p class="t-body-md w-medium c-heading">Se está procurando conhecimento para tomar decisões mais conscientes e se sentir mais preparada para os próximos passos, seja bem-vinda.</p></div>
+      </div>
+      <div class="cta" data-reveal><Button href={site.checkout} event="cta_mensagem">Quero começar minha Jornada Fértil</Button></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .frame { background: linear-gradient(180deg, var(--lavender-100), var(--cream-50)); }
+  .inner { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+  .head { display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 800px; }
+  .contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 896px; width: 100%; }
+  .contrast > div { display: flex; align-items: center; gap: 16px; padding: 24px 32px; border-radius: var(--radius-2xl); }
+  .contrast :global(.icon) { flex: none; }
+  .no { border: var(--hairline) dashed var(--lavender-200); }
+  .no :global(.icon) { color: var(--navy-700); }
+  .yes { background: var(--bg-surface); border: var(--hairline) solid var(--lavender-200); }
+  .yes :global(.icon) { color: var(--navy-700); --ko: #fff; }
+  .cta { padding-top: 8px; }
+  @media (max-width: 767px) {
+    .contrast { grid-template-columns: 1fr; }
+    .contrast > div { flex-direction: column; align-items: flex-start; gap: 12px; padding: 24px; }
+    .cta :global(.btn), .cta :global(.btn) { white-space: normal; text-align: center; }
+  }
+</style>

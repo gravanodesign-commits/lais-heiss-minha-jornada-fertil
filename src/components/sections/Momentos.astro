@@ -1,0 +1,91 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+const items = [
+  ['calendar-cycle', 'Planejando engravidar', 'e querendo se preparar melhor antes de começar'],
+  ['sprout', 'Começando a tentar agora', 'e querendo entender por onde começar'],
+  ['search', 'Tentando há um tempo', 'sem saber onde focar'],
+  ['stethoscope', 'Com diagnóstico recente', 'SOP, endometriose ou disfunção na tireoide'],
+  ['test-tubes', 'Em investigação', 'com especialistas, indução ou inseminação'],
+  ['embryo', 'Se preparando para a FIV', 'um processo de fertilização in vitro'],
+];
+---
+<section class="framed momentos" id="para-quem">
+  <div class="frame guides">
+    <div class="deco" aria-hidden="true">
+      <i class="ring" style="width:900px;height:900px;border-color:rgba(140,148,194,.18)"></i>
+      <i class="ring" style="width:1200px;height:1200px;border-color:rgba(140,148,194,.12)"></i>
+      <i class="ring" style="width:1500px;height:1500px;border-color:rgba(140,148,194,.08)"></i>
+    </div>
+    <Star x="10.7%" y={140} size={14} />
+    <Star x="88.8%" y={330} size={12} ritmo="rapido" />
+    <Star x="4.3%" y={600} size={16} ritmo="lento" fase={2} />
+    <Star x="94.5%" y={820} size={10} fase={2} />
+    <Star x="83.8%" y={110} size={18} ritmo="lento" />
+
+    <div class="wrap inner">
+      <header class="head center" data-reveal>
+        <Eyebrow>Para quem é</Eyebrow>
+        <h2 class="t-h2 w-medium c-heading">Em que <span class="c-soft">momento</span> você está?</h2>
+      </header>
+
+      <ul class="cards">
+        {items.map(([icon, title, sub], i) => (
+          <li class:list={['card', 'moment', { last: i === items.length - 1 }]} data-reveal style={`--i:${i}`}>
+            <div class="top">
+              <Badge icon={icon} size="L" color="lavanda" />
+              <span class="note step step-d">etapa {i + 1} de 6</span>
+            </div>
+            <div class="txt">
+              <span class="note step step-m">etapa {i + 1} de 6</span>
+              <h3 class="t-body-md w-medium c-heading">{title}</h3>
+              <p class="t-body-sm c-secondary">{sub}</p>
+              <span class="track" aria-hidden="true">
+                {items.map((_, k) => <i class:list={{ cur: k === i, past: k < i }}></i>)}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <p class="chip chip-l" data-reveal><Icon name="shield-check:f" size={24} />O curso acompanha qualquer um desses momentos — sem substituir seu acompanhamento médico.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .frame { background: linear-gradient(180deg, var(--lavender-100), var(--cream-50)); }
+  .deco { position: absolute; left: 50%; top: 160px; z-index: -1; }
+  .deco .ring { left: 0; top: 0; transform: translate(-50%, -50%); }
+  .inner { display: flex; flex-direction: column; align-items: center; gap: 56px; }
+  .head { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cards { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .moment { padding: 32px; display: flex; flex-direction: column; gap: 20px; transition: transform .3s ease, box-shadow .3s ease; }
+  .moment:hover { transform: translateY(-4px); box-shadow: 0 24px 40px -28px rgba(45, 49, 132, .35); }
+  .moment.last { background: linear-gradient(160deg, #fff 0%, #fff 55%, var(--lavender-100) 100%); }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .step { font-size: 24px; color: var(--lavender-400); }
+  .txt { display: flex; flex-direction: column; gap: 4px; }
+  .step-m { display: none; }
+  .track { display: flex; gap: 3px; margin-top: 12px; }
+  .track i { flex: 1; height: 4px; border-radius: 2px; background: var(--lavender-100); }
+  .track i.past { background: var(--lavender-300); }
+  .track i.cur { background: var(--lavender-500); }
+  .chip-l { padding: 16px 24px 16px 20px; font-size: var(--fs-body-lg); line-height: var(--lh-body-lg); letter-spacing: .015em; }
+
+  @media (max-width: 1023px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 767px) {
+    .inner { gap: 40px; }
+    .deco { transform: scale(.42); transform-origin: 0 0; top: 120px; }
+    .cards { grid-template-columns: 1fr; gap: 12px; }
+    .moment { flex-direction: row; align-items: flex-start; gap: 16px; padding: 20px; }
+    .moment :global(.badge) { width: 56px; height: 56px; flex: none; }
+    .top { flex: none; }
+    .step-d { display: none; }
+    .step-m { display: block; font-size: 20px; margin-bottom: 2px; }
+    .txt { flex: 1; gap: 2px; }
+    .chip-l { border-radius: var(--radius-2xl); align-items: flex-start; font-size: var(--fs-body-md); line-height: var(--lh-body-md); padding: 20px; }
+  }
+</style>

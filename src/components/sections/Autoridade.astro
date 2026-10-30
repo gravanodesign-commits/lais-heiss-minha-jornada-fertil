@@ -1,0 +1,145 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Badge from '../Badge.astro';
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+import Heart from '../Heart.astro';
+import { site } from '../../data/site';
+const specs = [['ovum', 'Fertilidade'], ['pregnant', 'Gestação'], ['baby', 'Nutrição do bebê']];
+const nums = [
+  ['calendar', '9 anos', 'de atuação na área', 9, '', ' anos'],
+  ['users', '+2.000', 'mulheres e famílias atendidas', 2000, '+', ''],
+  ['map-pin', 'Brasil', 'e outros países', 0, '', ''],
+] as const;
+---
+<section class="framed autoridade" id="sobre">
+  <div class="frame frame-dark guides">
+    <div class="deco" aria-hidden="true">
+      <i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i>
+      <i class="glow"></i>
+    </div>
+    <Star x="10.7%" y={90} size={18} ritmo="lento" />
+    <Star x="42.6%" y={639} size={12} ritmo="rapido" />
+    <Star x="91.6%" y={250} size={16} />
+    <Star x="83.8%" y={690} size={12} fase={2} />
+    <Star x="5.7%" y={640} size={10} ritmo="rapido" fase={2} />
+    <Star x="52.6%" y={120} size={10} />
+
+    <div class="wrap">
+      <div class="content">
+        <div class="photo" data-reveal>
+          <div class="arch-back"></div>
+          <div class="arch"><img src="/img/lais-autoridade.webp" alt="Retrato de Laís Hess" width="900" height="2123" loading="lazy" /></div>
+          <Heart class="heart" color="var(--yellow-50)" />
+          <div class="seal seal-1" data-float>
+            <Badge icon="heart-pulse" size="S" color="amarelo" />
+            <div><p class="t-caption c-muted">Especialista em</p><p class="t-label-lg w-medium" style="color:var(--navy-800)">Fertilidade</p></div>
+          </div>
+          <p class="seal seal-2 t-label-md w-medium" data-float><Icon name="baby" size={16} />Gestação e nutrição do bebê</p>
+          <p class="note signature">Laís Hess</p>
+        </div>
+
+        <div class="text">
+          <div data-reveal><Eyebrow tone="dark">Quem conduz</Eyebrow></div>
+          <h2 class="t-h1 w-medium c-on-action" data-reveal>Laís Hess</h2>
+          <p class="t-body-lg c-on-action role" data-reveal>Nutricionista especialista em fertilidade, gestação e nutrição do bebê.</p>
+          <p class="cred t-caption" data-reveal><Icon name="shield-check" size={16} />{site.crn}</p>
+          <ul class="specs" data-reveal>
+            {specs.map(([icon, label]) => <li class="t-label-md w-medium"><Icon name={icon} size={16} />{label}</li>)}
+          </ul>
+          <ul class="nums" data-reveal>
+            {nums.map(([icon, big, small, n, pre, suf]) => (
+              <li>
+                <Icon name={icon} size={20} />
+                <p class="t-h3 w-bold c-accent" data-count={n || undefined} data-prefix={pre} data-suffix={suf}>{big}</p>
+                <p class="t-body-sm c-on-action">{small}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <header class="dep-head center" data-reveal>
+        <Eyebrow tone="dark">Depoimentos</Eyebrow>
+        <h3 class="t-h4 w-medium c-on-action">O que dizem quem já fez essa jornada</h3>
+      </header>
+      <!-- TODO: substituir pelos depoimentos reais (vídeo, print ou relato autorizado) -->
+      <ul class="deps">
+        {[0, 1, 2].map(() => (
+          <li class="dep" data-reveal>
+            <Icon name="quote" size={24} />
+            <p class="t-body-lg c-on-action">[Depoimento em vídeo, print ou relato autorizado]</p>
+            <div class="author"><span class="avatar"></span><div><p class="t-label-lg w-medium c-on-action">Nome da paciente</p><p class="t-caption" style="color:var(--text-disabled)">Momento da jornada</p></div></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .frame { background: linear-gradient(180deg, var(--lavender-800), var(--lavender-600)); }
+  .deco { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+  .deco .ring { border-color: rgba(255,255,255,.14); }
+  .r1 { left: 16px; top: 90px; width: 620px; height: 620px; }
+  .r2 { left: -84px; top: -10px; width: 820px; height: 820px; border-color: rgba(255,255,255,.1) !important; }
+  .r3 { left: -184px; top: -110px; width: 1020px; height: 1020px; border-color: rgba(255,255,255,.07) !important; }
+  .glow { position: absolute; left: 58.2%; top: -260px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(255,224,145,.22), rgba(255,224,145,0) 70%); }
+
+  .content { display: grid; grid-template-columns: 460px 1fr; gap: 96px; align-items: center; }
+  .photo { position: relative; width: 460px; height: 560px; }
+  .arch-back, .arch { position: absolute; width: 400px; height: 520px; border-radius: 9999px 9999px 32px 32px; }
+  .arch-back { left: 50px; top: 40px; background: var(--lavender-500); opacity: .5; }
+  .arch { left: 10px; top: 0; background: var(--yellow-200); border: var(--hairline) solid var(--cream-100); overflow: hidden; }
+  .arch img { position: absolute; left: 50%; top: 2%; width: 66%; max-width: none; transform: translateX(-62%); }
+  .photo :global(.heart) { left: 309px; top: -14px; width: 202px; }
+  .seal { position: absolute; z-index: 2; display: flex; align-items: center; border-radius: 999px; }
+  .seal-1 { left: -48px; top: 330px; gap: 12px; padding: 10px 20px 10px 10px; background: #fff; box-shadow: 0 12px 30px rgba(26, 26, 64, .25); }
+  .seal-2 { left: 250px; top: 446px; gap: 8px; white-space: nowrap; padding: 8px 16px 8px 14px; background: var(--yellow-300); color: var(--navy-800); }
+  .signature { position: absolute; left: 40px; top: 572px; font-size: 40px; color: var(--yellow-200); transform: rotate(-8deg); }
+
+  .text { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; max-width: 579px; }
+  .role { max-width: 520px; }
+  .cred { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.8); }
+  .cred :global(.icon), .specs :global(.icon) { color: var(--yellow-300); }
+  .specs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .specs li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border-radius: 999px; background: rgba(255,255,255,.08); border: var(--hairline) solid rgba(255,255,255,.25); color: #fff; }
+  .nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; }
+  .nums li { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; border-radius: 20px; background: var(--lavender-700); border: var(--hairline) solid rgba(255,255,255,.22); }
+  .nums :global(.icon) { color: var(--yellow-300); }
+
+  .dep-head { margin-top: 72px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .deps { margin-top: 72px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .dep { display: flex; flex-direction: column; gap: 16px; padding: 32px; border-radius: var(--radius-2xl); background: var(--lavender-700); border: var(--hairline) dashed var(--lavender-400); }
+  .dep :global(.icon) { color: var(--yellow-300); }
+  .author { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.18); }
+
+  @media (max-width: 1279px) {
+    .content { grid-template-columns: 400px 1fr; gap: 64px; }
+    .photo { transform: scale(.87); transform-origin: left center; }
+  }
+  @media (max-width: 1023px) {
+    .content { grid-template-columns: 1fr; justify-items: center; gap: 72px; }
+    .photo { transform: none; }
+    .text { max-width: 640px; justify-self: stretch; }
+    .deps { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 767px) {
+    .photo { width: 334px; height: 420px; }
+    .arch-back { left: 34px; top: 27px; width: 272px; height: 354px; }
+    .arch { left: 7px; top: 0; width: 272px; height: 354px; }
+    .photo :global(.heart) { left: 186px; top: -10px; width: 138px; }
+    .seal-1 { left: -6px; top: 220px; }
+    .seal-2 { left: auto; right: -6px; top: 330px; font-size: 12px; padding: 6px 12px 6px 10px; }
+    .signature { left: 24px; top: 392px; font-size: 30px; }
+    .r1 { left: -90px; top: 60px; width: 420px; height: 420px; }
+    .r2 { left: -160px; top: -10px; width: 560px; height: 560px; }
+    .r3 { left: -230px; top: -80px; width: 700px; height: 700px; }
+    .nums { grid-template-columns: 1fr; }
+    .nums li { flex-direction: row; align-items: center; gap: 12px; padding: 14px 18px; }
+    .nums li .t-h3 { font-size: 26px; flex: none; }
+    .dep-head, .deps { margin-top: 48px; }
+    .dep { padding: 24px; }
+  }
+</style>

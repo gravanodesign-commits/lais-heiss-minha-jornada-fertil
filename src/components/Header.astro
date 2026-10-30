@@ -1,0 +1,68 @@
+---
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import { site } from '../data/site';
+const links = [
+  ['O curso', '#curso'], ['Módulos', '#modulos'], ['Para quem é', '#para-quem'], ['Sobre a Laís', '#sobre'], ['Dúvidas', '#duvidas'],
+];
+---
+<header class="site-header" data-header>
+  <div class="bar">
+    <a href="#topo" class="brand" aria-label="Minha Jornada Fértil — início"><img src="/logo.svg" alt="" width="139" height="64" /></a>
+    <nav class="nav" aria-label="Principal">
+      {links.map(([label, href]) => <a class="t-body-sm nav-link" href={href}>{label}</a>)}
+      <Button href={site.checkout} variant="accent" size="M" event="cta_menu">Jornada Fértil</Button>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-mobile" data-menu-toggle>
+      <Icon name="menu" size={24} /><span class="sr-only">Abrir menu</span>
+    </button>
+  </div>
+  <div class="menu-mobile" id="menu-mobile" hidden data-menu>
+    {links.map(([label, href]) => <a class="t-h5 w-medium m-link" href={href}>{label}</a>)}
+    <Button href={site.checkout} variant="primary" size="L" event="cta_menu_mobile">Quero começar minha Jornada Fértil</Button>
+  </div>
+</header>
+
+<style>
+  .site-header { position: fixed; z-index: 50; top: 36px; left: 0; right: 0; padding-inline: max(var(--margin), calc((100% - 1216px) / 2)); pointer-events: none; transition: top .35s ease; }
+  .bar {
+    pointer-events: auto; display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 24px;
+    border-radius: var(--radius-full); transition: background-color .35s ease, box-shadow .35s ease, padding .35s ease, height .35s ease;
+  }
+  .brand img { width: 139px; height: 64px; transition: width .35s ease, height .35s ease; }
+  .nav { display: flex; align-items: center; gap: 32px; }
+  .nav-link { color: var(--text-primary); text-decoration: none; position: relative; }
+  .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .menu-btn { display: none; }
+
+  .site-header.is-scrolled { top: 12px; }
+  .site-header.is-scrolled .bar {
+    height: 64px; padding: 0 8px 0 24px; background: rgba(253, 252, 247, .82);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+    box-shadow: 0 0 0 .5px var(--lavender-200), 0 12px 32px -16px rgba(46, 48, 71, .25);
+  }
+  .site-header.is-scrolled .brand img { width: 104px; height: 48px; }
+
+  .menu-mobile { display: none; }
+
+  @media (max-width: 1023px) {
+    .site-header { top: 20px; padding-inline: 20px; }
+    .nav { display: none; }
+    .brand img { width: 104px; height: 48px; }
+    .menu-btn {
+      display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: var(--hairline) solid var(--lavender-200);
+      background: var(--gray-0); color: var(--navy-700); cursor: pointer;
+    }
+    .site-header.is-scrolled { top: 8px; }
+    .site-header.is-scrolled .bar { padding: 0 6px 0 16px; height: 60px; }
+    .site-header.is-scrolled .brand img { width: 87px; height: 40px; }
+    .menu-mobile:not([hidden]) {
+      pointer-events: auto; display: flex; flex-direction: column; gap: 20px; margin-top: 8px; padding: 28px 24px 24px;
+      background: var(--bg-subtle); border-radius: var(--radius-2xl); border: var(--hairline) solid var(--lavender-200);
+      box-shadow: 0 24px 48px -24px rgba(46, 48, 71, .35);
+    }
+    .m-link { color: var(--text-heading); text-decoration: none; }
+    .menu-mobile :global(.btn) { margin-top: 8px; white-space: normal; text-align: center; }
+  }
+</style>

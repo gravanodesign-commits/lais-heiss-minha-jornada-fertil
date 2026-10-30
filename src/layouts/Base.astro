@@ -1,0 +1,25 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <meta name="theme-color" content="#fdfcf7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:image" content="/img/lais-hero.webp" />
+    <link rel="icon" href="/heart.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/DunbarTall-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/DunbarTall-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

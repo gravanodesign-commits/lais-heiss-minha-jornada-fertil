@@ -1,0 +1,195 @@
+---
+import Icon from '../Icon.astro';
+import Star from '../Star.astro';
+import Button from '../Button.astro';
+import { site } from '../../data/site';
+
+const tabs = [
+  { icon: 'calendar-cycle', label: 'Planejando engravidar' },
+  { icon: 'ovulation', label: 'Tentando há um tempo' },
+  { icon: 'test-tubes', label: 'Em reprodução assistida' },
+];
+const modules = [
+  'Por onde sua fertilidade realmente começa',
+  'Decodificando os sinais do seu corpo',
+  'O prato que prepara você para engravidar',
+  'Vida fértil além do prato',
+  'Universo feminino: entendendo seu corpo',
+];
+// posições dos brilhos no Container (1408 x 1450)
+const stars: [number, number, number, 'lento' | 'medio' | 'rapido', 1 | 2, 'yellow' | 'lavender'][] = [
+  [250, 215, 14, 'medio', 1, 'lavender'], [1150, 250, 20, 'lento', 1, 'yellow'], [170, 430, 12, 'rapido', 2, 'lavender'], [1240, 470, 16, 'medio', 2, 'lavender'],
+  [1300, 330, 10, 'rapido', 1, 'yellow'], [300, 700, 11, 'lento', 2, 'yellow'], [1110, 700, 13, 'medio', 1, 'lavender'],
+];
+---
+<section class="hero framed" id="topo">
+  <div class="frame hero-frame">
+    {stars.map(([x, y, s, r, f, t]) => <Star x={`${(x / 1408) * 100}%`} y={y} size={s} ritmo={r} fase={f} tone={t} class="hero-star" />)}
+
+    <div class="intro">
+      <p class="pill" data-hero-in>
+        <span class="tag">Novo</span>
+        <span class="t-body-sm c-secondary">Curso on-line com a nutricionista Laís Hess</span>
+      </p>
+      <h1 class="t-h1 c-heading title" data-hero-in>
+        <span class="w-book">Você já tentou de tudo.</span><br />
+        <span class="w-bold">E ainda não sabe se está <br class="br-d" />no <span class="c-soft">caminho certo.</span></span>
+      </h1>
+      <p class="t-body-lg c-secondary lead" data-hero-in>Suplemento, alimentação, ciclo, exames. Você foi atrás de cada peça — mas ninguém te mostrou como elas se encaixam.</p>
+      <p class="note hero-note" data-hero-in>
+        talvez não seja falta de <span class="strike">esforço<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 30 3, 60 9, 98 4" /></svg></span>…<br />
+        talvez seja falta de <span class="underline">clareza<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 6 C 30 7, 60 5, 98 6" /></svg></span>
+      </p>
+      <div class="cta" data-hero-in>
+        <Button href="#curso" event="cta_hero">Quero conhecer o curso</Button>
+        <Star x={360} y={-2} size={16} ritmo="lento" />
+        <Star x={348} y={46} size={11} ritmo="medio" fase={2} tone="lavender" />
+        <Star x={-24} y={-14} size={9} ritmo="rapido" tone="lavender" />
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Em que momento você está?" data-hero-in>
+      {tabs.map((t, i) => (
+        <button type="button" role="tab" class="tab t-body-sm w-medium" aria-selected={i === 0 ? 'true' : 'false'} data-tab={i}>
+          <Icon name={t.icon} size={20} /><span>{t.label}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="stage" data-hero-window>
+      <span class="chip access-chip" data-float><Icon name="calendar" size={24} />12 meses de acesso</span>
+
+      <div class="window">
+        <div class="win-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="address t-caption c-muted"><Icon name="lock" size={16} />Minha Jornada Fértil · Área de aulas</span>
+        </div>
+        <div class="win-body">
+          <div class="video">
+            <div class="grid" aria-hidden="true"></div>
+            <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
+            <Star x="71.4%" y="12.0%" size={10} tone="white" />
+            <Star x="15.7%" y="50.0%" size={10} ritmo="rapido" />
+            <Star x="87.1%" y="46.0%" size={14} />
+            <Star x="8.6%" y="14.0%" size={18} ritmo="lento" />
+            <img class="person" src="/img/lais-hero.webp" alt="Laís Hess, nutricionista, sorrindo" width="437" height="858" fetchpriority="high" />
+            <div class="caption">
+              <p class="t-h4 w-medium c-on-action">Laís Hess</p>
+              <p class="t-overline c-on-action">Nutricionista especialista em fertilidade, gestação e nutrição do bebê</p>
+            </div>
+            <div class="progress" aria-hidden="true"><span></span></div>
+            <a class="play" href="#curso" aria-label="Conhecer o curso"><span class="halo"></span><Icon name="play:f" size={32} /></a>
+          </div>
+          <aside class="modules" aria-label="Conteúdo do curso">
+            <div>
+              <p class="t-overline c-brand">Conteúdo do curso</p>
+              <p class="t-caption c-muted">7 módulos · 30 aulas</p>
+            </div>
+            <ol>
+              {modules.map((m, i) => (
+                <li class:list={['mod', { on: i === 0 }]}><span class="step t-label-md w-medium">{i + 1}</span><span class="t-body-sm">{m}</span></li>
+              ))}
+            </ol>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding-top: var(--frame-inset); }
+  .hero-frame {
+    background: linear-gradient(180deg, var(--lavender-100) 0%, var(--cream-50) 55%, var(--yellow-50) 100%);
+    padding: 84px 96px 0; display: flex; flex-direction: column; align-items: center; overflow: hidden;
+  }
+  .intro { position: relative; z-index: 2; width: 100%; max-width: 1000px; display: flex; flex-direction: column; align-items: center; gap: 24px; padding-top: 96px; text-align: center; }
+  .pill { display: inline-flex; align-items: center; gap: 12px; padding: 8px 20px 8px 8px; background: var(--bg-surface); border: var(--hairline) solid var(--lavender-200); border-radius: var(--radius-full); }
+  .title { max-width: 1000px; }
+  .lead { max-width: 640px; }
+  .hero-note { font-size: 34px; color: var(--lavender-500); }
+  .hero-note .strike, .hero-note .underline { position: relative; display: inline-block; }
+  .hero-note .underline { color: var(--navy-700); }
+  .hero-note svg { position: absolute; left: -2%; width: 104%; height: 12px; overflow: visible; fill: none; stroke-width: 2.2; stroke-linecap: round; }
+  .hero-note .strike svg { top: 50%; transform: translateY(-40%); stroke: var(--lavender-500); }
+  .hero-note .underline svg { bottom: -4px; stroke: var(--navy-700); stroke-width: 1.5; }
+  .cta { position: relative; padding-top: 16px; }
+  .cta :global(.star) { margin-top: 16px; }
+
+  .tabs { position: relative; z-index: 2; margin-top: 64px; display: flex; gap: 4px; padding: 4px; border-radius: var(--radius-full); background: rgba(255, 255, 255, .55); border: var(--hairline) solid var(--lavender-200); }
+  .tab { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: var(--radius-full); border: 0; background: transparent; color: var(--text-muted); cursor: pointer; transition: background-color .25s ease, color .25s ease, box-shadow .25s ease; white-space: nowrap; }
+  .tab :global(.icon) { color: var(--icon-current); }
+  .tab[aria-selected="true"] { background: var(--gray-0); color: var(--text-heading); box-shadow: 0 2px 6px rgba(46, 48, 71, .06), 0 1px 2px rgba(46, 48, 71, .04); }
+  .tab:hover:not([aria-selected="true"]) { color: var(--text-primary); }
+
+  .stage { position: relative; width: 100%; max-width: 1084px; margin-top: 40px; }
+  .access-chip { position: absolute; z-index: 3; left: -105px; top: 197px; box-shadow: var(--shadow-chip); }
+  .window { background: rgba(255, 255, 255, .8); border: var(--hairline) solid var(--border-default); border-bottom: 0; border-radius: 28px 28px 0 0; padding: 12px 12px 0; display: flex; flex-direction: column; gap: 8px; }
+  .win-bar { display: flex; align-items: center; gap: 20px; padding: 4px 8px 8px; }
+  .dots { display: flex; gap: 8px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--lavender-300); }
+  .dots i:nth-child(2) { background: var(--yellow-300); } .dots i:nth-child(3) { background: var(--cream-300); }
+  .address { flex: 1; display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--radius-full); background: var(--lavender-50); }
+  .address :global(.icon) { color: var(--navy-700); }
+  .win-body { display: grid; grid-template-columns: 700fr 360fr; border-radius: 16px 16px 0 0; overflow: hidden; background: var(--navy-900); }
+  .video { position: relative; aspect-ratio: 700 / 500; overflow: hidden; background: linear-gradient(180deg, var(--lavender-200), var(--lavender-500)); container-type: inline-size; }
+  .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px); background-size: 5.714cqw 5.714cqw; background-position: 0 0; -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 80%); mask-image: linear-gradient(180deg, #000 0%, transparent 80%); }
+  .rings { position: absolute; left: 50.14%; top: 38%; }
+  .rings i { position: absolute; left: 0; top: 0; border-radius: 50%; border: 1px solid; transform: translate(-50%, -50%); }
+  .rings i:nth-child(1) { width: 37.1cqw; height: 37.1cqw; border-color: rgba(255,255,255,.45); }
+  .rings i:nth-child(2) { width: 54.3cqw; height: 54.3cqw; border-color: rgba(255,255,255,.3); }
+  .rings i:nth-child(3) { width: 71.4cqw; height: 71.4cqw; border-color: rgba(255,255,255,.18); }
+  .video :global(.star) { position: absolute; }
+  .person { position: absolute; left: 18.86%; top: 1.4%; width: 62.4%; height: auto; max-width: none; }
+  .caption { position: absolute; left: 4.57%; right: 4.57%; bottom: 9.6%; display: flex; flex-direction: column; gap: 8px; }
+  .progress { position: absolute; left: 4.57%; right: 4.57%; bottom: 4%; height: 4px; border-radius: 2px; background: rgba(255,255,255,.35); }
+  .progress span { display: block; height: 100%; width: 26.7%; border-radius: 2px; background: var(--yellow-300); }
+  .play { position: absolute; left: 50%; top: 50.2%; width: 80px; height: 80px; margin: -40px 0 0 -40px; border-radius: 50%; background: #fff; display: grid; place-items: center; color: var(--navy-800); box-shadow: 0 12px 32px rgba(41, 46, 77, .25); z-index: 2; transition: transform .3s ease; }
+  .play :global(.icon) { margin-left: 4px; }
+  .play .halo { position: absolute; inset: -16px; border-radius: 50%; background: rgba(255,255,255,.3); z-index: -1; }
+  .play:hover { transform: scale(1.06); }
+  @media (prefers-reduced-motion: no-preference) { .play .halo { animation: halo 2.6s ease-out infinite; } }
+  @keyframes halo { 0% { transform: scale(.85); opacity: 1; } 100% { transform: scale(1.35); opacity: 0; } }
+
+  .modules { background: var(--gray-0); padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+  .modules > div { display: flex; flex-direction: column; gap: 4px; }
+  .modules ol { display: flex; flex-direction: column; gap: 4px; }
+  .mod { display: flex; align-items: center; gap: 16px; padding: 12px 20px; border-radius: var(--radius-lg); color: var(--text-secondary); }
+  .mod.on { background: var(--lavender-50); color: var(--text-heading); }
+  .step { flex: none; min-width: 28px; height: 28px; padding: 0 8px; border-radius: var(--radius-full); display: grid; place-items: center; background: var(--lavender-100); color: var(--text-brand); }
+  .mod.on .step { background: var(--lavender-500); color: var(--text-on-action); }
+
+  @media (max-width: 1279px) {
+    .hero-frame { padding-inline: 40px; }
+    .access-chip { left: -16px; top: auto; bottom: 60px; }
+  }
+  @media (max-width: 1023px) {
+    .win-body { grid-template-columns: 1fr; }
+    .modules { display: none; }
+  }
+  @media (max-width: 767px) {
+    .hero-frame { padding: 104px 20px 0; border-radius: var(--radius-3xl); }
+    .intro { padding-top: 0; gap: 20px; }
+    .pill { flex-direction: column; gap: 6px; padding: 0; background: none; border: 0; }
+    .br-d { display: none; }
+    .hero-note { font-size: 22px; }
+    .cta { padding-top: 8px; }
+    .cta :global(.star) { display: none; }
+    .tabs { margin-top: 48px; flex-direction: column; width: 100%; border-radius: var(--radius-2xl); background: rgba(255,255,255,.7); padding: 6px; }
+    .tab { justify-content: center; border-radius: var(--radius-xl); }
+    .stage { margin-top: 32px; }
+    .access-chip { left: auto; right: -12px; top: -28px; bottom: auto; padding: 10px 16px; font-size: var(--fs-body-sm); }
+    .window { border-radius: 20px 20px 0 0; padding: 8px 8px 0; }
+    .win-bar { gap: 10px; padding: 4px 4px 6px; }
+    .dots { gap: 5px; } .dots i { width: 8px; height: 8px; }
+    .address { padding: 6px 12px; font-size: 11px; }
+    .win-body { border-radius: 12px 12px 0 0; }
+    .video { aspect-ratio: 334 / 300; }
+    .person { left: 14%; width: 72%; top: 3%; }
+    .rings { top: 40%; }
+    .caption { bottom: 12%; gap: 4px; }
+    .caption .t-overline { font-size: 9px; line-height: 12px; }
+    .play { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
+    .hero-frame :global(.hero-star):nth-child(n+4) { display: none; }
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Icon from '../Icon.astro';
+import Button from '../Button.astro';
+import Arrow from '../Arrow.astro';
+import { site } from '../../data/site';
+const faq = [
+  ['Para quem é o Minha Jornada Fértil?', 'Para mulheres e casais em diferentes momentos da jornada para engravidar: desde quem está se planejando para começar até quem já enfrenta dificuldades, recebeu algum diagnóstico ou está passando por reprodução assistida.'],
+  ['Estou fazendo FIV. O curso serve para mim?', 'Sim. Existe um módulo específico para quem está passando por uma FIV, abordando a preparação para diferentes momentos do protocolo, da coleta aos dias depois da transferência. O curso atua como conteúdo educativo e não substitui as orientações da equipe responsável pelo seu tratamento.'],
+  ['Meu parceiro também deve participar?', 'Sim. A fertilidade não é uma questão exclusivamente feminina, e o curso possui um módulo dedicado à fertilidade masculina.'],
+  ['O curso substitui uma consulta?', 'Não. O Minha Jornada Fértil é um curso educativo e não substitui avaliação, diagnóstico ou tratamento individualizado realizado por profissionais de saúde.'],
+  ['Por quanto tempo terei acesso?', 'Você terá acesso ao curso durante 12 meses.'],
+  ['Onde vou assistir às aulas?', 'O curso é on-line, com aulas gravadas disponibilizadas pela plataforma Hotmart, para que você possa assistir no seu ritmo.'],
+  ['Existe suporte?', 'Sim. Você contará com suporte pela plataforma Hotmart.'],
+  ['Quanto custa?', 'O investimento é de R$ 397, com as opções de pagamento apresentadas no momento da compra.'],
+  ['Existe garantia?', 'Sim. Você tem 7 dias de garantia, conforme as condições apresentadas na plataforma.'],
+];
+const social = [['instagram', 'Instagram'], ['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['whatsapp', 'WhatsApp']] as const;
+---
+<section class="section faq" id="duvidas">
+  <div class="wrap grid">
+    <div class="text" data-reveal>
+      <div class="head">
+        <Eyebrow>Dúvidas</Eyebrow>
+        <h2 class="t-h2 w-medium c-heading">Perguntas <span class="c-soft">frequentes</span></h2>
+        <p class="t-body-md c-secondary">Reunimos as dúvidas mais comuns sobre o curso. Se ainda restar alguma, fale com a gente.</p>
+      </div>
+      <Button href="#curso" variant="outline" event="cta_faq">Quero conhecer o curso</Button>
+      <div class="social">
+        <p class="t-overline c-muted">Acompanhe a Laís</p>
+        <div class="social-row">
+          <ul>
+            {social.map(([k, label]) => (
+              <li><a class="soc" href={site.social[k]} target="_blank" rel="noopener" aria-label={`${label} da Laís Hess`}><Icon name={k} size={20} /></a></li>
+            ))}
+          </ul>
+          <Arrow width={36} class="soc-arrow" />
+          <p class="note soc-note">me acompanha<br />por lá!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="list">
+      {faq.map(([q, a]) => (
+        <details class="qa" open data-reveal>
+          <summary><span class="t-body-lg w-medium c-heading">{q}</span><span class="toggle" aria-hidden="true"><Icon name="plus" size={16} class="i-plus" /><Icon name="minus" size={16} class="i-minus" /></span></summary>
+          <p class="t-body-md c-secondary answer">{a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+})} />
+
+<style>
+  .grid { display: grid; grid-template-columns: 400px 736px; justify-content: space-between; gap: 80px; align-items: start; }
+  .text { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; position: sticky; top: 112px; }
+  .head { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+  .head p { max-width: 380px; }
+  .social { width: 100%; display: flex; flex-direction: column; gap: 16px; padding-top: 32px; border-top: var(--hairline) solid var(--lavender-200); }
+  .social-row { display: flex; align-items: center; gap: 16px; }
+  .social ul { display: flex; gap: 8px; }
+  .soc { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--gray-0); border: var(--hairline) solid var(--lavender-200); color: var(--navy-700); transition: background-color .2s ease, transform .2s ease; }
+  .soc:hover { background: var(--lavender-100); transform: translateY(-2px); }
+  .soc-note { font-size: 23px; color: var(--lavender-600); }
+  .list { display: flex; flex-direction: column; gap: 12px; }
+  .qa { background: var(--gray-0); border: var(--hairline) solid var(--lavender-200); border-radius: var(--radius-2xl); padding: 32px; }
+  summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  .toggle { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--lavender-50); color: var(--navy-700); transition: background-color .3s ease; }
+  .toggle :global(.icon) { grid-area: 1 / 1; }
+  .toggle :global(.i-minus) { display: none; }
+  .qa[open] .toggle { background: var(--lavender-500); color: var(--cream-100); }
+  .qa[open] :global(.i-plus) { display: none; } .qa[open] :global(.i-minus) { display: block; }
+  .answer { padding: 8px 80px 0 0; }
+  @media (max-width: 1279px) { .grid { grid-template-columns: 340px 1fr; gap: 56px; } .answer { padding-right: 48px; } }
+  @media (max-width: 1023px) { .grid { grid-template-columns: 1fr; gap: 40px; } .text { position: static; } }
+  @media (max-width: 767px) {
+    .qa { padding: 20px; }
+    summary { align-items: flex-start; }
+    .answer { padding-right: 0; }
+    .social-row :global(.soc-arrow) { display: none; }
+    .soc-note { font-size: 20px; }
+  }
+</style>
